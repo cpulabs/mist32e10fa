@@ -1,0 +1,11 @@
+
+#For modelsim and riviera-pro
+*.wlf
+wlf*
+transcript*
+*.asdb
+*.ucdb
+
+#For Sim
+*.pyc
+

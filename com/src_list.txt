@@ -1,0 +1,16 @@
+../../src/*.sv
+../../src/peripheral_interface_controller/*.sv
+../../src/lib/*.sv
+../../src/primitive/altera_primitive_sync_fifo_showahead_32in_32out_8depth/*.v
+../../src/primitive/altera_primitive_sync_fifo_showahead_97in_97out_32depth/*.v
+../../src/primitive/ram_512bit_16word/*.v
+../../src/core/*.sv
+../../src/core/allocate/*.sv
+../../src/core/decode/*.sv
+../../src/core/execute/*.sv
+../../src/core/fetch/*.sv
+../../src/core/instruction_buffer/*.sv
+../../src/core/l1_data/*.sv
+../../src/core/l1_inst/*.sv
+../../src/core/pipeline_control/*.sv
+../../src/core/interrupt_control/*.sv

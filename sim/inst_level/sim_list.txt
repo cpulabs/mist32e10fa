@@ -1,0 +1,3 @@
+./tb/*.sv
+../model/sim_memory_model/*.sv
+../model/altera/*.v
