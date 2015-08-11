@@ -69,7 +69,8 @@ module core(
 		****************************************/
 		input wire iINTERRUPT_VALID,
 		output wire oINTERRUPT_ACK,
-		input wire [5:0] iINTERRUPT_NUM
+		input wire [5:0] iINTERRUPT_NUM,
+		output wire [31:0] oDEBUG_PC
 	);
 
 
@@ -127,7 +128,8 @@ module core(
 		//Interrupt
 		.iINTERRUPT_VALID(iINTERRUPT_VALID),
 		.oINTERRUPT_ACK(oINTERRUPT_ACK),
-		.iINTERRUPT_NUM(iINTERRUPT_NUM)
+		.iINTERRUPT_NUM(iINTERRUPT_NUM),
+		.oDEBUG_PC(oDEBUG_PC)
 	);
 
 

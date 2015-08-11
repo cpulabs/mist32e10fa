@@ -86,7 +86,8 @@ module execute(
 		output wire oBPREDICT_HIT,					//Guess Hit!
 		output wire oBPREDICT_JUMP,					//Branch Active
 		output wire [31:0] oBPREDICT_JUMP_ADDR,		//Branch Address
-		output wire [31:0] oBPREDICT_INST_ADDR		//Branch Instruction Memory Address
+		output wire [31:0] oBPREDICT_INST_ADDR,		//Branch Instruction Memory Address
+		output wire [31:0] oDEBUG_PC
 	);
 
 
@@ -1014,6 +1015,8 @@ module execute(
 	assign oEXCEPTION_LOCK = (b_state == L_PARAM_STT_LOAD) ||  (b_state == L_PARAM_STT_STORE) ||  (b_state == L_PARAM_STT_RELOAD); //new 20150526
 
 	assign oSYSREG_FLAGR = {27'h0, sysreg_flags_register};
+
+	assign oDEBUG_PC = b_pc;
 
 	/*********************************************************************************************************
 	Assertion

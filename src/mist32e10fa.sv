@@ -50,7 +50,8 @@ module mist32e10fa(
 		output wire [5:0] oIO_IRQ_CONFIG_TABLE_ENTRY,
 		output wire oIO_IRQ_CONFIG_TABLE_FLAG_MASK,
 		output wire oIO_IRQ_CONFIG_TABLE_FLAG_VALID,
-		output wire [1:0] oIO_IRQ_CONFIG_TABLE_FLAG_LEVEL
+		output wire [1:0] oIO_IRQ_CONFIG_TABLE_FLAG_LEVEL,
+		output wire [31:0] oDEBUG_PC
 	);
 
 
@@ -194,7 +195,8 @@ module mist32e10fa(
 		****************************************/
 		.iINTERRUPT_VALID(io2cpu_interrupt_valid),
 		.oINTERRUPT_ACK(cpu2io_interrupt_ack),
-		.iINTERRUPT_NUM(io2cpu_interrupt_num)
+		.iINTERRUPT_NUM(io2cpu_interrupt_num),
+		.oDEBUG_PC(oDEBUG_PC)
 	);
 
 

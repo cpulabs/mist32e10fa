@@ -61,7 +61,8 @@ module core_pipeline(
 		****************************************/
 		input wire iINTERRUPT_VALID,
 		input wire [5:0] iINTERRUPT_NUM,
-		output wire oINTERRUPT_ACK
+		output wire oINTERRUPT_ACK,
+		output wire [31:0] oDEBUG_PC
 	);
 
 	//Cache
@@ -690,7 +691,8 @@ module core_pipeline(
 		.oBPREDICT_HIT(branch_predict_result_hit),
 		.oBPREDICT_JUMP(branch_predict_result_jump),
 		.oBPREDICT_JUMP_ADDR(branch_predict_result_jump_addr),
-		.oBPREDICT_INST_ADDR(branch_predict_result_inst_addr)
+		.oBPREDICT_INST_ADDR(branch_predict_result_inst_addr),
+		.oDEBUG_PC(oDEBUG_PC)
 	);
 
 	load_store_pipe_arbiter LDST_PIPE_ARBITOR(
