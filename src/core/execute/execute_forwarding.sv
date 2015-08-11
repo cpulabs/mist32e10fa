@@ -62,22 +62,22 @@ module execute_forwarding(
 		input [31:0] func_prev_gr_data;
 		begin
 			//Forwarding Valid
-			if(func_prev_valid && !func_src_settle)begin
+			if(!func_src_settle)begin
 				//SPR Forwarding
 				//Source Sysreg -> Valid, Source Pointer -> SPR, Previous Data -> Valid, Previous SPR Writeback -> Valid
-				if(func_src_sysreg && func_src_pointer == `SYSREG_SPR && (func_prev_spr_writeback || func_prev_dest_pointer == `SYSREG_SPR))begin
+				if(func_src_sysreg && func_src_pointer == `SYSREG_SPR && (func_prev_spr_writeback || (func_prev_valid && func_prev_sysreg && func_prev_dest_pointer == `SYSREG_SPR)))begin
 					func_forwarding_rewrite = func_prev_spr;
 				end
 				//FRCLR Forwarding
-				else if(func_src_sysreg && func_src_pointer == `SYSREG_FRCLR && func_prev_dest_pointer == `SYSREG_FRCR2FRCXR)begin
+				else if(func_prev_valid && func_src_sysreg && func_src_pointer == `SYSREG_FRCLR && func_prev_dest_pointer == `SYSREG_FRCR2FRCXR)begin
 					func_forwarding_rewrite = func_prev_frcr[31:0];
 				end
 				//FRCHR Forwarding
-				else if(func_src_sysreg && func_src_pointer == `SYSREG_FRCHR && func_prev_dest_pointer == `SYSREG_FRCR2FRCXR)begin
+				else if(func_prev_valid && func_src_sysreg && func_src_pointer == `SYSREG_FRCHR && func_prev_dest_pointer == `SYSREG_FRCR2FRCXR)begin
 					func_forwarding_rewrite = func_prev_frcr[63:32];
 				end
 				//General Register Forwarding
-				else if(!func_src_sysreg && !func_prev_sysreg && func_src_pointer == func_prev_dest_pointer)begin
+				else if(func_prev_valid && !func_src_sysreg && !func_prev_sysreg && func_src_pointer == func_prev_dest_pointer)begin
 					func_forwarding_rewrite = func_prev_gr_data;
 				end
 				//No Forwarding
