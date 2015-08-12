@@ -198,6 +198,7 @@ module core_pipeline(
 	wire [31:0] execution2ldst_ldst_data;
 	wire ldst2execution_ldst_busy;
 	wire ldst2execution_ldst_req;
+	wire ldst2execution_ldst_cache_hit;
 	wire [31:0] ldst2execution_ldst_data;
 	//Data Cache to Memory Pipe
 	wire ldst_arbiter2d_cache_req;
@@ -208,6 +209,7 @@ module core_pipeline(
 	wire [31:0] ldst_arbiter2d_cache_addr;
 	wire [31:0] ldst_arbiter2d_cache_data;
 	wire d_cache2ldst_arbiter_valid;
+	wire d_cache2ldst_arbiter_cache_hit;
 	wire [31:0] d_cache2ldst_arbiter_data;
 	//System Register
 	wire [31:0] sysreg_flagr;
@@ -668,6 +670,7 @@ module core_pipeline(
 		.oDATAIO_ADDR(execution2ldst_ldst_addr),
 		.oDATAIO_DATA(execution2ldst_ldst_data),
 		.iDATAIO_REQ(ldst2execution_ldst_req),
+		.iDATAIO_CACHE_HIT(ldst2execution_ldst_cache_hit),
 		.iDATAIO_DATA(ldst2execution_ldst_data),
 		//Next
 		.oNEXT_VALID(execution2dispatch_valid),
@@ -704,6 +707,7 @@ module core_pipeline(
 		.oLDST_ADDR(ldst_arbiter2d_cache_addr),
 		.oLDST_DATA(ldst_arbiter2d_cache_data),
 		.iLDST_VALID(d_cache2ldst_arbiter_valid),
+		.iLDST_CACHE_HIT(d_cache2ldst_arbiter_cache_hit),
 		.iLDST_DATA(d_cache2ldst_arbiter_data),
 		//Selector
 		.iUSE_SEL(exception2ldst_ldst_use),		//0:Execution | 1:Exception
@@ -716,6 +720,7 @@ module core_pipeline(
 		.iEXE_ADDR(execution2ldst_ldst_addr),
 		.iEXE_DATA(execution2ldst_ldst_data),
 		.oEXE_REQ(ldst2execution_ldst_req),
+		.oEXE_CACHE_HIT(ldst2execution_ldst_cache_hit),
 		.oEXE_DATA(ldst2execution_ldst_data),
 		//Exception Module
 		.iEXCEPT_REQ(exception2ldst_ldst_req),
@@ -747,6 +752,7 @@ module core_pipeline(
 		.iLDST_DATA(ldst_arbiter2d_cache_data),
 		//Cache -> Load Store
 		.oLDST_VALID(d_cache2ldst_arbiter_valid),
+		.oLDST_CACHE_HIT(d_cache2ldst_arbiter_cache_hit),
 		.oLDST_DATA(d_cache2ldst_arbiter_data),
 		/****************************************
 		Data Memory

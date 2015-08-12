@@ -22,6 +22,7 @@ module l1_data_cache(
 		input wire [31:0] iLDST_DATA,
 		//Cache -> Load Store
 		output wire oLDST_VALID,
+		output wire oLDST_CACHE_HIT,
 		output wire [31:0] oLDST_DATA,
 		/****************************************
 		Data Memory
@@ -389,6 +390,8 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		end
 	end
 
+	//assign cache_result_hit = 1'h0;
+
 
 	l1_data_cache_64entry_4way_line64b_bus_8b CACHE_MODULE(
 		/********************************
@@ -433,14 +436,17 @@ always@(posedge iCLOCK or negedge inRESET)begin
 
 	reg next_data_valid;
 	reg [31:0] next_data_data;
+	reg next_cache_hit;
 	always @* begin
 		if(b_req_main_state == L_PARAM_OUTDATA || b_req_main_state == L_PARAM_WR_OUTDATA)begin
 			next_data_valid = 1'b1;
 			next_data_data = b_mem_result_data;
+			next_cache_hit = 1'b1; 
 		end
 		else begin
 			next_data_valid = cache_result_valid && cache_result_hit;
 			next_data_data = cache_result_data;
+			next_cache_hit = 1'b0;
 		end
 	end
 
@@ -470,6 +476,7 @@ always@(posedge iCLOCK or negedge inRESET)begin
 	//This -> Load Store Module
 	assign oLDST_VALID = next_data_valid || iIO_VALID;
 	assign oLDST_DATA = (iIO_VALID)? iIO_DATA : next_data_data;
+	assign oLDST_CACHE_HIT = (iIO_VALID)? 1'b0 : next_cache_hit;
 
 endmodule
 

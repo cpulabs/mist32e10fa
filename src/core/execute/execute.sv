@@ -63,6 +63,7 @@ module execute(
 		output wire [31:0] oDATAIO_ADDR,
 		output wire [31:0] oDATAIO_DATA,
 		input wire iDATAIO_REQ,
+		input wire iDATAIO_CACHE_HIT,
 		input wire [31:0] iDATAIO_DATA,
 		//Writeback
 		output wire oNEXT_VALID,
@@ -519,6 +520,7 @@ module execute(
 	//Load Data Mask and Shft
 	wire [31:0] load_data;
 	execute_load_data LOAD_MASK(
+		.iSHIFT_ENABLE(!iDATAIO_CACHE_HIT),
 		.iMASK(load_mask),
 		.iSHIFT(load_shift),
 		.iDATA(iDATAIO_DATA),

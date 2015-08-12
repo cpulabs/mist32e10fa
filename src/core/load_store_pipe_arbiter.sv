@@ -9,6 +9,7 @@ module load_store_pipe_arbiter(
 		output wire [31:0] oLDST_ADDR,
 		output wire [31:0] oLDST_DATA,
 		input wire iLDST_VALID,
+		input wire iLDST_CACHE_HIT,
 		input wire [31:0] iLDST_DATA,
 		//Selector
 		input wire iUSE_SEL,		//0:Execution | 1:Exception
@@ -21,6 +22,7 @@ module load_store_pipe_arbiter(
 		input wire [31:0] iEXE_ADDR,
 		input wire [31:0] iEXE_DATA,
 		output wire oEXE_REQ,
+		output wire oEXE_CACHE_HIT,
 		output wire [31:0] oEXE_DATA,
 		//Exception Module
 		input wire iEXCEPT_REQ,
@@ -51,6 +53,7 @@ module load_store_pipe_arbiter(
 	//ALU-LoadStore Unit
 	assign oEXE_BUSY = (iUSE_SEL)? 1'b1 : iLDST_BUSY;
 	assign oEXE_REQ = (iUSE_SEL)? 1'b0 : iLDST_VALID;
+	assign oEXE_CACHE_HIT = iLDST_CACHE_HIT;
 	assign oEXE_DATA = iLDST_DATA;
 
 
