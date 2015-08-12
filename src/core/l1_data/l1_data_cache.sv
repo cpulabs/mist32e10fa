@@ -390,7 +390,7 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		end
 	end
 
-	//assign cache_result_hit = 1'h0;
+	assign cache_result_hit = 1'h0;		//cache invalid now
 
 
 	l1_data_cache_64entry_4way_line64b_bus_8b CACHE_MODULE(
@@ -411,7 +411,7 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		.iRD_ADDR({iLDST_ADDR[31:2], 2'h0}),		//Tag:22bit | Index:4bit(4Way*16Entry) | LineSize:6bit(64B)
 		//Search Output Result
 		.oRD_VALID(cache_result_valid),
-		.oRD_HIT(cache_result_hit),
+		.oRD_HIT(),//cache_result_hit),
 		.iRD_BUSY(b_req_main_state != L_PARAM_IDLE),
 		.oRD_DATA(cache_result_data),
 		/********************************
@@ -441,12 +441,12 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		if(b_req_main_state == L_PARAM_OUTDATA || b_req_main_state == L_PARAM_WR_OUTDATA)begin
 			next_data_valid = 1'b1;
 			next_data_data = b_mem_result_data;
-			next_cache_hit = 1'b1; 
+			next_cache_hit = 1'b0; 
 		end
 		else begin
 			next_data_valid = cache_result_valid && cache_result_hit;
 			next_data_data = cache_result_data;
-			next_cache_hit = 1'b0;
+			next_cache_hit = 1'b1;
 		end
 	end
 

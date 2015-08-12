@@ -44,7 +44,19 @@ module execute_mul(
 	Rand
 	******************************************/
 	//function 
-	wire [31:0] xor_shift = {iDATA_1[30:0], (iDATA_1[31]^iDATA_1[21]^iDATA_1[1]^iDATA_1[0])};
+	wire [31:0] xor_shift = func_xorshift32(iDATA_1);//{iDATA_1[30:0], (iDATA_1[31]^iDATA_1[21]^iDATA_1[1]^iDATA_1[0])};
+
+	function [31:0] func_xorshift32;
+		input [31:0] func_seed;
+		reg [31:0] func_tmp0;
+		reg [31:0] func_tmp1;
+		begin
+			func_tmp0 = func_seed ^ (func_seed << 13);
+			func_tmp1 = func_tmp0 ^ (func_tmp0 >> 17);
+			func_xorshift32 = func_tmp1 ^ (func_tmp1 << 5);
+		end
+	endfunction
+
 
 
 	/*

@@ -304,6 +304,7 @@
 # 
 # Top level modules:
 # 	interrupt_control
+# hexadecimal
 # Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
 # Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_INST_CACHE.CACHE_MODULE.MEMORY_BLOCK0.altsyncram_component
 # Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
@@ -325,4 +326,4 @@
 # [INF][sim_memory_model.v]Mem[0]->2300600d2000400d
 # [SIM-OK]Simulation Finished.
 # ** Note: $finish    : ./tb/tb_inst_level.sv(163)
-#    Time: 5330 ns  Iteration: 1  Instance: /tb_inst_level
+#    Time: 9370 ns  Iteration: 1  Instance: /tb_inst_level

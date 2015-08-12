@@ -51,23 +51,23 @@ module execute_load_data(
 				if(func_mask == 4'hf)begin
 					func_load_fairing = func_data;
 				end
-				else if(func_mask == 4'b1000)begin
+				else if(func_mask == 4'b0001)begin
 					func_load_fairing = {24'h0, func_data[31:24]};
 				end
-				else if(func_mask == 4'b0100)begin
+				else if(func_mask == 4'b0010)begin
 					func_load_fairing = {24'h0, func_data[23:16]};
 				end
-				else if(func_mask == 4'b0010)begin
+				else if(func_mask == 4'b0100)begin
 					func_load_fairing = {24'h0, func_data[15:8]};
 				end
-				else if(func_mask == 4'b0001)begin
+				else if(func_mask == 4'b1000)begin
 					func_load_fairing = {24'h0, func_data[7:0]};
 				end
-				else if(func_mask == 4'b1100)begin
+				else if(func_mask == 4'b0011)begin
 					func_load_fairing = {24'h0, func_data[31:16]};
 				end
 				else begin
-				//else if(func_mask == 4'b0011)begin
+				//else if(func_mask == 4'b1100)begin
 					func_load_fairing = {24'h0, func_data[15:0]};
 				end
 			end

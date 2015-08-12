@@ -37,5 +37,7 @@ vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../s
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/core/pipeline_control/*.sv
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/core/interrupt_control/*.sv
+radix -hexadecimal
+log -r /*
 run -all
 quit

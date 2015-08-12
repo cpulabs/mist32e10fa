@@ -183,52 +183,52 @@ rand.out:     ファイル形式 elf32-mist32
    3000c:	78 9a bc de 	*unknown*
 
 00030010 <EXPECT0_0>:
-   30010:	02 46 8a cf 	*unknown*
+   30010:	58 7d a5 a0 	*unknown*
 
 00030014 <EXPECT0_1>:
-   30014:	04 8d 15 9e 	*unknown*
+   30014:	75 f3 ab 44 	*unknown*
 
 00030018 <EXPECT0_2>:
-   30018:	09 1a 2b 3d 	*unknown*
+   30018:	13 fe 4a 29 	*unknown*
 
 0003001c <EXPECT0_3>:
-   3001c:	12 34 56 7b 	*unknown*
+   3001c:	8d db e9 f4 	*unknown*
 
 00030020 <EXPECT1_0>:
-   30020:	13 57 9b de 	*unknown*
+   30020:	f2 dc e9 64 	*unknown*
 
 00030024 <EXPECT1_1>:
-   30024:	26 af 37 bd 	*unknown*
+   30024:	91 fb 8d 1c 	*unknown*
 
 00030028 <EXPECT1_2>:
-   30028:	4d 5e 6f 7a 	*unknown*
+   30028:	eb 57 db 30 	*unknown*
 
 0003002c <EXPECT1_3>:
-   3002c:	9a bc de f5 	*unknown*
+   3002c:	16 0b b6 28 	*unknown*
 
 00030030 <EXPECT2_0>:
-   30030:	00 00 00 03 	add	r0,r3
+   30030:	00 04 20 21 	*unknown*
 
 00030034 <EXPECT2_1>:
-   30034:	00 00 00 06 	add	r0,r6
+   30034:	04 08 06 01 	*unknown*
 
 00030038 <EXPECT2_2>:
-   30038:	00 00 00 0d 	add	r0,r13
+   30038:	9d cc a8 c5 	*unknown*
 
 0003003c <EXPECT2_3>:
-   3003c:	00 00 00 1b 	add	r0,r27
+   3003c:	12 55 99 4f 	*unknown*
 
 00030040 <EXPECT3_0>:
-   30040:	f1 35 79 bd 	*unknown*
+   30040:	cf 2c 00 9e 	*unknown*
 
 00030044 <EXPECT3_1>:
-   30044:	e2 6a f3 7b 	*unknown*
+   30044:	a8 c3 07 21 	*unknown*
 
 00030048 <EXPECT3_2>:
-   30048:	c4 d5 e6 f6 	*unknown*
+   30048:	cc cf 25 72 	*unknown*
 
 0003004c <EXPECT3_3>:
-   3004c:	89 ab cd ec 	*unknown*
+   3004c:	24 4f 59 02 	*unknown*
 
 セクション .stack の逆アセンブル:
 
