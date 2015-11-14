@@ -312,8 +312,6 @@ module allocate #(
 	allocate_general_register GRF(
 		//System
 		.iCLOCK(iCLOCK),
-		.inRESET(inRESET),
-		.iRESET_SYNC(iRESET_SYNC),
 		//Write Port
 		.iWR_VALID(iWB_VALID && !iWB_DESTINATION_SYSREG && iWB_WRITEBACK && !iEVENT_HOLD),
 		.iWR_ADDR(iWB_DESTINATION),
