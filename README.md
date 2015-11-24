@@ -35,6 +35,15 @@ Include
   
   ./core/include/core.h				:	Instruction and Internal format
 
+
+Synthesis
+---
+This project have all IPs for simulation. But you must add IPs for synthesis.
+
+  altera_primitive_dualram_512bit_16word
+  
+  altera_primitive_sync_fifo_showahead_97in_97out_32depth
+  
   
 Tool
 ---
@@ -47,5 +56,5 @@ Modelsim
  
 ***Synthesis***
 
-Quartus II(Altera)
+Quartus II(Altera) / Quartus Prime(Altera)
 

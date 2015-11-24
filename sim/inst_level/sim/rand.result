@@ -93,6 +93,8 @@
 # -- Compiling module dcfifo_low_latency
 # -- Compiling module dcfifo_mixed_widths
 # -- Compiling module dcfifo
+# -- Compiling module altera_syncram_derived
+# -- Compiling module altera_syncram_derived_forwarding_logic
 # -- Compiling module altaccumulate
 # -- Compiling module altmult_accum
 # -- Compiling module altmult_add
@@ -104,6 +106,7 @@
 # -- Compiling module altddio_bidir
 # -- Compiling module altdpram
 # -- Compiling module altsyncram
+# -- Compiling module altsyncram_body
 # -- Compiling module alt3pram
 # -- Compiling module parallel_add
 # -- Compiling module scfifo
@@ -116,6 +119,7 @@
 # -- Compiling module alt_cal_mm
 # -- Compiling module alt_cal_c3gxb
 # -- Compiling module alt_cal_sv
+# -- Compiling module alt_cal_av
 # -- Compiling module alt_aeq_s4
 # -- Compiling module alt_eyemon
 # -- Compiling module alt_dfe
@@ -182,6 +186,7 @@
 # 	alt_cal_mm
 # 	alt_cal_c3gxb
 # 	alt_cal_sv
+# 	alt_cal_av
 # 	alt_aeq_s4
 # 	alt_eyemon
 # 	alt_dfe
@@ -192,6 +197,16 @@
 # 	altserial_flash_loader
 # 	sld_virtual_jtag_basic
 # 	altsource_probe
+# QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module altera_primitive_dualram_512bit_16word
+# 
+# Top level modules:
+# 	altera_primitive_dualram_512bit_16word
+# QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module altera_primitive_sync_fifo_showahead_97in_97out_32depth
+# 
+# Top level modules:
+# 	altera_primitive_sync_fifo_showahead_97in_97out_32depth
 # QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
 # -- Compiling module endian_controller
 # -- Compiling module memory_pipe_arbiter
@@ -209,21 +224,6 @@
 # 
 # Top level modules:
 # 	mist32e10fa_arbiter_matching_queue
-# QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
-# -- Compiling module altera_primitive_sync_fifo_showahead_32in_32out_8depth
-# 
-# Top level modules:
-# 	altera_primitive_sync_fifo_showahead_32in_32out_8depth
-# QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
-# -- Compiling module altera_primitive_sync_fifo_showahead_97in_97out_32depth
-# 
-# Top level modules:
-# 	altera_primitive_sync_fifo_showahead_97in_97out_32depth
-# QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
-# -- Compiling module ram_512bit_16word
-# 
-# Top level modules:
-# 	ram_512bit_16word
 # QuestaSim-64 vlog 10.0c Compiler 2011.07 Jul 21 2011
 # -- Compiling module core
 # -- Compiling module core_pipeline
@@ -304,23 +304,6 @@
 # 
 # Top level modules:
 # 	interrupt_control
-# hexadecimal
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_INST_CACHE.CACHE_MODULE.MEMORY_BLOCK0.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_INST_CACHE.CACHE_MODULE.MEMORY_BLOCK1.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_INST_CACHE.CACHE_MODULE.MEMORY_BLOCK2.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_INST_CACHE.CACHE_MODULE.MEMORY_BLOCK3.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_DATA_CACHE.CACHE_MODULE.MEMORY_BLOCK0.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_DATA_CACHE.CACHE_MODULE.MEMORY_BLOCK1.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_DATA_CACHE.CACHE_MODULE.MEMORY_BLOCK2.altsyncram_component
-# Warning: read_during_write_mode_mixed_ports is assumed as               OLD_DATA
-# Time: 0  Instance: tb_inst_level.TARGET.CORE.CORE_PIPELINE.L1_DATA_CACHE.CACHE_MODULE.MEMORY_BLOCK3.altsyncram_component
 # Check Start
 # [INF][sim_memory_model.v]Please wait. Endian converting for test file.
 # [INF][sim_memory_model.v]Mem[0]->2300600d2000400d

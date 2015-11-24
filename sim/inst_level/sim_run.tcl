@@ -6,17 +6,15 @@ vlog -work work +incdir+../../src/include +incdir+../../src/core/include ./tb/*.
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../model/sim_memory_model/*.sv
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../model/altera/*.v
+
+vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../ip/altera_primitive_dualram_512bit_16word/*.v
+
+vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../ip/altera_primitive_sync_fifo_showahead_97in_97out_32depth/*.v
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/*.sv
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/peripheral_interface_controller/*.sv
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/lib/*.sv
-
-vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/primitive/altera_primitive_sync_fifo_showahead_32in_32out_8depth/*.v
-
-vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/primitive/altera_primitive_sync_fifo_showahead_97in_97out_32depth/*.v
-
-vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/primitive/ram_512bit_16word/*.v
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/core/*.sv
 
@@ -37,7 +35,5 @@ vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../s
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/core/pipeline_control/*.sv
 
 vlog -work work +incdir+../../src/include +incdir+../../src/core/include ../../src/core/interrupt_control/*.sv
-radix -hexadecimal
-log -r /*
 run -all
 quit

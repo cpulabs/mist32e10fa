@@ -151,7 +151,7 @@ module l1_inst_cache_64entry_4way_line64b_bus_8b(
 	Byte Enable		: YES(64bit)
 	Read==Write		: Dont care
 	---------------------------------------*/
-	ram_512bit_16word MEMORY_BLOCK0(
+	altera_primitive_dualram_512bit_16word MEMORY_BLOCK0(
 		.clock(iCLOCK),
 		.data(memory_write_data),				//512bit
 		.rdaddress(read_pointer),				//4bit
@@ -161,7 +161,7 @@ module l1_inst_cache_64entry_4way_line64b_bus_8b(
 		.q(memory_way0_out_data)				//512bit
 	);
 	
-	ram_512bit_16word MEMORY_BLOCK1(
+	altera_primitive_dualram_512bit_16word MEMORY_BLOCK1(
 		.clock(iCLOCK),
 		.data(memory_write_data),				//512bit
 		.rdaddress(read_pointer),				//4bit
@@ -171,7 +171,7 @@ module l1_inst_cache_64entry_4way_line64b_bus_8b(
 		.q(memory_way1_out_data)				//512bit
 	);
 	
-	ram_512bit_16word MEMORY_BLOCK2(
+	altera_primitive_dualram_512bit_16word MEMORY_BLOCK2(
 		.clock(iCLOCK),
 		.data(memory_write_data),				//512bit
 		.rdaddress(read_pointer),				//4bit
@@ -181,7 +181,7 @@ module l1_inst_cache_64entry_4way_line64b_bus_8b(
 		.q(memory_way2_out_data)				//512bit
 	);
 	
-	ram_512bit_16word MEMORY_BLOCK3(
+	altera_primitive_dualram_512bit_16word MEMORY_BLOCK3(
 		.clock(iCLOCK),
 		.data(memory_write_data),				//512bit
 		.rdaddress(read_pointer),				//4bit
