@@ -77,49 +77,7 @@ module execute_load_store(
 	localparam PL_STT_WAIT = 2'h2;
 	
 	wire condition_start_load_store = iPREV_VALID && iPREV_EX_LDST && iSTATE_NORMAL && !iNEXT_BUSY;
-	wire condition_req_load_store = ((b_state == PL_STT_IDLE) && condition_start_load_store) || (b_state == PL_STT_REQ);
 
-	/*
-	always@(posedge iCLOCK or negedge inRESET)begin
-		if(!inRESET)begin
-			b_state <= PL_STT_IDLE;
-		end
-		else if(iRESET_SYNC || iEVENT_HOLD || iEVENT_END)begin
-			b_state <= PL_STT_IDLE;
-		end
-		else begin
-			case(b_state)
-				PL_STT_IDLE:
-					begin
-						if(condition_start_load_store)begin
-							if(!iLDST_BUSY)begin
-								b_state <= PL_STT_WAIT;
-							end
-							else begin
-								b_state <= PL_STT_REQ;
-							end
-						end
-					end
-				PL_STT_REQ:
-					begin
-						if(!iLDST_BUSY)begin
-							b_state <= PL_STT_WAIT;
-						end
-					end
-				PL_STT_WAIT:
-					begin
-						if(iLDST_VALID)begin
-							b_state <= PL_STT_IDLE;
-						end
-					end
-				default:
-					begin
-						b_state <= PL_STT_IDLE;
-					end
-			endcase
-		end
-	end
-	*/
 
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin

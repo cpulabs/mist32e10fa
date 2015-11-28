@@ -62,10 +62,10 @@ module pipeline_control_irq_return(
 	reg b_finish;
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
-			b_finish <= PL_STT_IDLE;
+			b_finish <= 1'h0;
 		end
 		else if(iRESET_SYNC)begin
-			b_finish <= PL_STT_IDLE;
+			b_finish <= 1'h0;
 		end
 		else begin
 			b_finish <= state == PL_STT_DONE;

@@ -5,6 +5,7 @@ wlf*
 transcript*
 *.asdb
 *.ucdb
+*.bak
 
 #For Sim
 *.pyc

@@ -259,44 +259,6 @@ module fetch_branch_cache(
 	endfunction
 
 
-	/*****************************************************************************
-	It for Test
-	*****************************************************************************/
-	wire [1:0] test_lru0_0 = b_tag0_lru[0];
-	wire [1:0] test_lru0_1 = b_tag0_lru[1];
-	wire [1:0] test_lru0_2 = b_tag0_lru[2];
-	wire [1:0] test_lru0_3 = b_tag0_lru[3];
-	wire [1:0] test_lru0_4 = b_tag0_lru[4];
-	wire [1:0] test_lru0_5 = b_tag0_lru[5];
-	wire [1:0] test_lru0_6 = b_tag0_lru[6];
-	wire [1:0] test_lru0_7 = b_tag0_lru[7];
-
-	wire [1:0] test_lru1_0 = b_tag1_lru[0];
-	wire [1:0] test_lru1_1 = b_tag1_lru[1];
-	wire [1:0] test_lru1_2 = b_tag1_lru[2];
-	wire [1:0] test_lru1_3 = b_tag1_lru[3];
-	wire [1:0] test_lru1_4 = b_tag1_lru[4];
-	wire [1:0] test_lru1_5 = b_tag1_lru[5];
-	wire [1:0] test_lru1_6 = b_tag1_lru[6];
-	wire [1:0] test_lru1_7 = b_tag1_lru[7];
-
-	wire [1:0] test_predict0_0 = b_tag0_predict[0];
-	wire [1:0] test_predict0_1 = b_tag0_predict[1];
-	wire [1:0] test_predict0_2 = b_tag0_predict[2];
-	wire [1:0] test_predict0_3 = b_tag0_predict[3];
-	wire [1:0] test_predict0_4 = b_tag0_predict[4];
-	wire [1:0] test_predict0_5 = b_tag0_predict[5];
-	wire [1:0] test_predict0_6 = b_tag0_predict[6];
-	wire [1:0] test_predict0_7 = b_tag0_predict[7];
-
-	wire [1:0] test_predict1_0 = b_tag1_predict[0];
-	wire [1:0] test_predict1_1 = b_tag1_predict[1];
-	wire [1:0] test_predict1_2 = b_tag1_predict[2];
-	wire [1:0] test_predict1_3 = b_tag1_predict[3];
-	wire [1:0] test_predict1_4 = b_tag1_predict[4];
-	wire [1:0] test_predict1_5 = b_tag1_predict[5];
-	wire [1:0] test_predict1_6 = b_tag1_predict[6];
-	wire [1:0] test_predict1_7 = b_tag1_lru[7];
 	
 endmodule
 

@@ -88,6 +88,7 @@ module pipeline_control_irq_call(
 		end
 	end
 
+	/*
 	reg b_finish;
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
@@ -100,6 +101,7 @@ module pipeline_control_irq_call(
 			b_finish <= state == PL_STT_DONE;
 		end
 	end
+	*/
 
 
 	/*****************************************************

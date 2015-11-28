@@ -231,7 +231,7 @@ module execute_adder_calc(
 						spr_valid = 1'b0;
 						spr = iSPR;
 						data = 32'h0;
-						ldst_addr = iSOURCE1 + {iADV_DATA, 1'b0};
+						ldst_addr = iSOURCE1 + {iADV_DATA[30:0], 1'b0};
 						ldst_data = iSOURCE0;
 						ldst_rw = 1'b0;
 						ldst_order = 2'h1;
@@ -243,7 +243,7 @@ module execute_adder_calc(
 						spr_valid = 1'b0;
 						spr = iSPR;
 						data = 32'h0;
-						ldst_addr = iSOURCE1 + {iADV_DATA, 2'b00};
+						ldst_addr = iSOURCE1 + {iADV_DATA[29:0], 2'b00};
 						ldst_data = iSOURCE0;
 						ldst_rw = 1'b0;
 						ldst_order = 2'h2;
@@ -267,7 +267,7 @@ module execute_adder_calc(
 						spr_valid = 1'b0;
 						spr = iSPR;
 						data = 32'h0;
-						ldst_addr = iSOURCE1 + {iADV_DATA, 1'b0};
+						ldst_addr = iSOURCE1 + {iADV_DATA[30:0], 1'b0};
 						ldst_data = func_store_data16((iSOURCE1[1:0] + {iADV_DATA[0], 1'b0} == 2'h0)? 2'h0 : 2'h2, iSOURCE0);//iSOURCE0;
 						ldst_rw = 1'b1;
 						ldst_order = 2'h1;
@@ -279,7 +279,7 @@ module execute_adder_calc(
 						spr_valid = 1'b0;
 						spr = iSPR;
 						data = 32'h0;
-						ldst_addr = iSOURCE1 + {iADV_DATA, 2'b00};
+						ldst_addr = iSOURCE1 + {iADV_DATA[29:0], 2'b00};
 						ldst_data = iSOURCE0;
 						ldst_rw = 1'b1;
 						ldst_order = 2'h2;

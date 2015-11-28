@@ -110,7 +110,6 @@ module execute(
 	reg b_writeback;
 	reg b_destination_sysreg;
 	reg [4:0] b_destination;
-	reg [3:0] b_afe;
 	reg [31:0] b_r_data;
 	reg b_spr_writeback;
 	reg [31:0] b_r_spr;
@@ -867,25 +866,6 @@ module execute(
 		end
 	end
 
-	/****************************************
-	Execute Category
-	****************************************/
-	reg b_ex_category_ldst;
-
-	always@(posedge iCLOCK or negedge inRESET)begin
-		if(!inRESET)begin
-			b_ex_category_ldst <= 1'b0;
-		end
-		else if(iEVENT_HOLD || iEVENT_START || iRESET_SYNC)begin
-			b_ex_category_ldst <= 1'b0;
-		end
-		else begin
-			if(b_state == L_PARAM_STT_NORMAL && iPREV_VALID && !lock_condition)begin
-				b_ex_category_ldst <= iPREV_EX_LDST;
-			end
-		end
-	end
-
 
 	/****************************************
 	Pass Line
@@ -895,14 +875,12 @@ module execute(
 			b_writeback <= 1'b0;
 			b_destination_sysreg  <= 1'b0;
 			b_destination <= 5'h0;
-			b_afe <= 4'h0;
 			b_spr_writeback <= 1'b0;
 		end
 		else if(iEVENT_HOLD || iRESET_SYNC || iEVENT_START)begin
 			b_writeback <= 1'b0;
 			b_destination_sysreg  <= 1'b0;
 			b_destination <= 5'h0;
-			b_afe <= 4'h0;
 			b_spr_writeback <= 1'b0;
 		end
 		else if(b_state == L_PARAM_STT_NORMAL)begin
@@ -911,14 +889,12 @@ module execute(
 					b_writeback <= iPREV_WRITEBACK;
 					b_destination_sysreg  <= iPREV_DESTINATION_SYSREG;
 					b_destination <= iPREV_DESTINATION;
-					b_afe <= iPREV_CC_AFE;
 					b_spr_writeback <= (iPREV_EX_LDST || iPREV_EX_SYS_LDST) && ldst_spr_valid;
 				end
 				else if(iPREV_EX_BRANCH)begin
 					b_writeback <= 1'b0;
 					b_destination_sysreg  <= iPREV_DESTINATION_SYSREG;
 					b_destination <= iPREV_DESTINATION;
-					b_afe <= iPREV_CC_AFE;
 					b_spr_writeback <= 1'b0;
 				end
 			end

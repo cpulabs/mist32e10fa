@@ -40,11 +40,10 @@ module execute_load_data(
 					func_load_fairing = {24'h0, func_data[7:0]};
 				end
 				else if(func_mask == 4'b0011)begin
-					func_load_fairing = {24'h0, func_data[31:16]};
+					func_load_fairing = {16'h0, func_data[31:16]};
 				end
 				else begin
-				//else if(func_mask == 4'b1100)begin
-					func_load_fairing = {24'h0, func_data[15:0]};
+					func_load_fairing = {16'h0, func_data[15:0]};
 				end
 			end
 			else begin
@@ -64,11 +63,10 @@ module execute_load_data(
 					func_load_fairing = {24'h0, func_data[7:0]};
 				end
 				else if(func_mask == 4'b0011)begin
-					func_load_fairing = {24'h0, func_data[31:16]};
+					func_load_fairing = {16'h0, func_data[31:16]};
 				end
 				else begin
-				//else if(func_mask == 4'b1100)begin
-					func_load_fairing = {24'h0, func_data[15:0]};
+					func_load_fairing = {16'h0, func_data[15:0]};
 				end
 			end
 		end
