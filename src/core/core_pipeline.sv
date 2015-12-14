@@ -82,12 +82,8 @@ module core_pipeline(
 	wire core_event_sysreg_set_pcr_set;
 	wire core_event_sysreg_set_ppcr_set;
 	wire core_event_sysreg_set_spr_set;
-	wire core_event_sysreg_set_fi0r_set;
-	wire core_event_sysreg_set_fi1r_set;
 	wire [31:0] core_event_sysreg_set_ppcr;
 	wire [31:0] core_event_sysreg_set_spr;
-	wire [31:0] core_event_sysreg_set_fi0r;
-	wire [31:0] core_event_sysreg_set_fi1r;
 	wire [31:0] core_event_sysreg_set_pcr;
 	//Fetch
 	wire fetch2lbuffer_inst_valid;
@@ -245,8 +241,6 @@ module core_pipeline(
 	wire exception2cim_irq_lock;
 	wire cim2exception_irq_req;
 	wire [6:0] cim2exception_irq_num;
-	wire [31:0] cim2exception_irq_fi0r;
-	wire [31:0] cim2exception_irq_fi1r;
 	wire exception2cim_irq_ack;
 	wire exception_idtset_valid;
 	wire exception_fault_valid;
@@ -277,8 +271,6 @@ module core_pipeline(
 		.iEXCEPTION_LOCK(exception2cim_irq_lock),
 		.oEXCEPTION_ACTIVE(cim2exception_irq_req),
 		.oEXCEPTION_IRQ_NUM(cim2exception_irq_num),
-		.oEXCEPTION_IRQ_FI0R(cim2exception_irq_fi0r),
-		.oEXCEPTION_IRQ_FI1R(cim2exception_irq_fi1r),
 		.iEXCEPTION_IRQ_ACK(exception2cim_irq_ack)
 	);
 
@@ -299,13 +291,9 @@ module core_pipeline(
 		.oEVENT_SETREG_PCR_SET(core_event_sysreg_set_pcr_set),
 		.oEVENT_SETREG_PPCR_SET(core_event_sysreg_set_ppcr_set),
 		.oEVENT_SETREG_SPR_SET(core_event_sysreg_set_spr_set),
-		.oEVENT_SETREG_FI0R_SET(core_event_sysreg_set_fi0r_set),
-		.oEVENT_SETREG_FI1R_SET(core_event_sysreg_set_fi1r_set),
 		.oEVENT_SETREG_PCR(core_event_sysreg_set_pcr),
 		.oEVENT_SETREG_PPCR(core_event_sysreg_set_ppcr),
 		.oEVENT_SETREG_SPR(core_event_sysreg_set_spr),
-		.oEVENT_SETREG_FI0R(core_event_sysreg_set_fi0r),
-		.oEVENT_SETREG_FI1R(core_event_sysreg_set_fi1r),
 		/************************************
 		System Register - Input
 		************************************/
@@ -351,8 +339,6 @@ module core_pipeline(
 		************************************/
 		.iEXCEPT_IRQ_REQ(cim2exception_irq_req),
 		.iEXCEPT_IRQ_NUM(cim2exception_irq_num),
-		.iEXCEPT_IRQ_FI0R(cim2exception_irq_fi0r),
-		.iEXCEPT_IRQ_FI1R(cim2exception_irq_fi1r),
 		.oEXCEPT_IRQ_ACK(exception2cim_irq_ack),
 		.oEXCEPT_IRQ_BUSY(exception2cim_irq_lock),
 		/************************************
@@ -521,12 +507,8 @@ module core_pipeline(
 		.iEVENT_END(core_event_end),
 		//Sysreg write
 		.iEVENT_SETREG_PPCR_SET(core_event_sysreg_set_ppcr_set),
-		.iEVENT_SETREG_FI0R_SET(core_event_sysreg_set_fi0r_set),
-		.iEVENT_SETREG_FI1R_SET(core_event_sysreg_set_fi1r_set),
 		.iEVENT_SETREG_PCR_SET(core_event_sysreg_set_pcr_set),
 		.iEVENT_SETREG_PPCR(core_event_sysreg_set_ppcr),
-		.iEVENT_SETREG_FI0R(core_event_sysreg_set_fi0r),
-		.iEVENT_SETREG_FI1R(core_event_sysreg_set_fi1r),
 		.iEVENT_SETREG_PCR(core_event_sysreg_set_pcr),
 		//System Register Input
 		.iSYSREG_FLAGR(sysreg_flagr),

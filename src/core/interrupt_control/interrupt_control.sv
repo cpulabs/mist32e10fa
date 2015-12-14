@@ -23,8 +23,6 @@ module interrupt_control(
 		input wire iEXCEPTION_LOCK,
 		output wire oEXCEPTION_ACTIVE,
 		output wire [6:0] oEXCEPTION_IRQ_NUM,
-		output wire [31:0] oEXCEPTION_IRQ_FI0R,
-		output wire [31:0] oEXCEPTION_IRQ_FI1R,
 		input wire iEXCEPTION_IRQ_ACK
 	);
 	
@@ -47,8 +45,6 @@ module interrupt_control(
 	reg [6:0] b_irq_num;	
 	reg b_irq_type;
 	reg b_irq_ack;
-	reg [31:0] b_irq_fi0r;
-	reg [31:0] b_irq_fi1r;
 	//Generate
 	
 	integer i;
@@ -147,13 +143,9 @@ module interrupt_control(
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
 			b_irq_num <= {7{1'b0}};
-			b_irq_fi0r <= 32'h0;
-			b_irq_fi1r <= 32'h0;
 		end
 		else if(iRESET_SYNC)begin
 			b_irq_num <= {7{1'b0}};
-			b_irq_fi0r <= 32'h0;
-			b_irq_fi1r <= 32'h0;
 		end
 		else begin
 			case(b_state)
@@ -161,15 +153,11 @@ module interrupt_control(
 					begin
 						if(b_hw_irq_valid && !iEXCEPTION_LOCK)begin
 							b_irq_num <= b_hw_irq_num;
-							b_irq_fi0r <= 32'h0;
-							b_irq_fi1r <= 32'h0;
 						end
 					end
 				default :
 					begin
-						b_irq_num <= b_irq_num;
-						b_irq_fi0r <= b_irq_fi0r;
-						b_irq_fi1r <= b_irq_fi1r;			
+						b_irq_num <= b_irq_num;		
 					end
 			endcase	
 		end
@@ -178,8 +166,6 @@ module interrupt_control(
 	assign oEXT_ACK = b_irq_ack;
 	assign oEXCEPTION_ACTIVE = (b_state == STT_COMP_WAIT)? !iEXCEPTION_IRQ_ACK : software_interrupt_valid || hardware_interrupt_valid || b_hw_irq_valid;
 	assign oEXCEPTION_IRQ_NUM = (b_state == STT_COMP_WAIT)? b_irq_num : {1'b0, external_num};
-	assign oEXCEPTION_IRQ_FI0R = b_irq_fi0r;
-	assign oEXCEPTION_IRQ_FI1R = b_irq_fi1r;
 
 			
 endmodule

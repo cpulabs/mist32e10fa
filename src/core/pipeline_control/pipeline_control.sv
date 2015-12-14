@@ -16,13 +16,9 @@ module pipeline_control(
 		output wire oEVENT_SETREG_PCR_SET,
 		output wire oEVENT_SETREG_PPCR_SET,
 		output wire oEVENT_SETREG_SPR_SET,
-		output wire oEVENT_SETREG_FI0R_SET,
-		output wire oEVENT_SETREG_FI1R_SET,
 		output wire [31:0] oEVENT_SETREG_PCR,
 		output wire [31:0] oEVENT_SETREG_PPCR,
 		output wire [31:0] oEVENT_SETREG_SPR,
-		output wire [31:0] oEVENT_SETREG_FI0R,
-		output wire [31:0] oEVENT_SETREG_FI1R,
 		//System Register - Input
 		input wire [31:0] iSYSREG_SPR,
 		input wire [31:0] iSYSREG_PSR,
@@ -57,8 +53,6 @@ module pipeline_control(
 		//External Exception
 		input wire iEXCEPT_IRQ_REQ,
 		input wire [6:0] iEXCEPT_IRQ_NUM,
-		input wire [31:0] iEXCEPT_IRQ_FI0R,
-		input wire [31:0] iEXCEPT_IRQ_FI1R,
 		output wire oEXCEPT_IRQ_ACK,
 		output wire oEXCEPT_IRQ_BUSY,
 		//Execute
@@ -426,53 +420,6 @@ module pipeline_control(
 
 	assign oEVENT_SETREG_PPCR_SET = b_sysreg_set_ppcr_valid;
 	assign oEVENT_SETREG_PPCR = b_sysreg_set_ppcr;					//Always PCR(Dispatch module) is True Date? like after jump true data?
-
-	//FI0R
-	reg b_sysreg_set_fi0r_valid;
-	reg [31:0] b_sysreg_set_fi0r;
-	always@(posedge iCLOCK or negedge inRESET)begin
-		if(!inRESET)begin
-			b_sysreg_set_fi0r_valid <= 1'b0;
-			b_sysreg_set_fi0r <= 32'h0;
-		end
-		else if(b_state == L_PARAM_IDLE || iRESET_SYNC)begin
-			b_sysreg_set_fi0r_valid <= 1'b0;
-			b_sysreg_set_fi0r <= 32'h0;
-		end
-		else begin
-			if(alu_jump_irq_call_start_condition || irq_call_start_condition)begin
-				b_sysreg_set_fi0r_valid <= 1'b1;
-				b_sysreg_set_fi0r <= iEXCEPT_IRQ_FI0R;
-			end
-		end
-	end
-	
-	assign oEVENT_SETREG_FI0R_SET = b_sysreg_set_fi0r_valid;
-	assign oEVENT_SETREG_FI0R = b_sysreg_set_fi0r;
-
-	//FI1R
-	reg b_sysreg_set_fi1r_valid;
-	reg [31:0] b_sysreg_set_fi1r;
-	always@(posedge iCLOCK or negedge inRESET)begin
-		if(!inRESET)begin
-			b_sysreg_set_fi1r_valid <= 1'b0;
-			b_sysreg_set_fi1r <= 32'h0;
-		end
-		else if(b_state == L_PARAM_IDLE || iRESET_SYNC)begin
-			b_sysreg_set_fi1r_valid <= 1'b0;
-			b_sysreg_set_fi1r <= 32'h0;
-		end
-		else begin
-			if(alu_jump_irq_call_start_condition || irq_call_start_condition)begin
-				b_sysreg_set_fi1r_valid <= 1'b1;
-				b_sysreg_set_fi1r <= iEXCEPT_IRQ_FI1R;
-			end
-		end
-	end
-	
-	assign oEVENT_SETREG_FI1R_SET = b_sysreg_set_fi1r_valid;
-	assign oEVENT_SETREG_FI1R = b_sysreg_set_fi1r;
-
 	
 	/****************************************************************************************************
 	Pipeline Control - Timing

@@ -234,8 +234,6 @@ System Register Set
 `define		SYSREG_FRCHR		5'h0b
 `define		SYSREG_FRCR2FRCXR	5'h0c
 `define		SYSREG_PFLAGR		5'h0d
-`define		SYSREG_FI0R			5'h0e
-`define		SYSREG_FI1R			5'h0f
 
 /******************************
 Execution Unit Select
