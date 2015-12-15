@@ -1,5 +1,5 @@
 /******************************
-Instruction Set
+Opcode
 ******************************/
 //Integer
 `define		OC_ADD		10'h000
@@ -94,7 +94,7 @@ Instruction Set
 
 
 /******************************
-Execution CMD Set
+Execute CMD Set
 ******************************/
 //Logic Unit
 `define		EXE_LOGIC_BUFFER0		5'h00
@@ -220,8 +220,6 @@ Logic Register Set
 System Register Set
 ******************************/
 //User System Register
-`define		SYSREG_CPUIDR		5'h00
-`define		SYSREG_COREIDR		5'h01
 `define		SYSREG_FLAGR		5'h02	
 `define		SYSREG_PCR			5'h03		
 `define		SYSREG_SPR			5'h04
@@ -244,7 +242,7 @@ Execution Unit Select
 `define		EXE_SELECT_ADDER		8'h08
 `define		EXE_SELECT_SHIFT		8'h10
 `define		EXE_SELECT_LOGIC		8'h20
-`define		EXE_SELECT_SYS_LDST		8'h40			//Only for SPR(because the SPR in Load Store Module)
+`define		EXE_SELECT_SYS_LDST		8'h40			//Only for SPR(because SPR in Load Store Module)
 `define		EXE_SELECT_SYS_REG		8'h80			
 	
 /******************************
@@ -276,14 +274,6 @@ CC
 `define		CC_SO		4'hE		//[signed >](Z = 0 and S = V)
 `define		CC_SEU		4'hF		//[signed =<](Z = 1 or N! = V)
 
-
-/******************************
-Execution AFE(After Execution Enhancing)
-******************************/
-//Load Store AFE
-`define		AFE_LDST_NONE		4'h0	//AFE None
-`define		AFE_LDST_SEXT8_32	4'h1	//AFE 8bit->32bit Signe Extension
-`define		AFE_LDST_SEXT16_32	4'h2	//AFE 16bit->32bit Signe Extension
 
 
 
