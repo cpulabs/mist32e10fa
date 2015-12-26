@@ -19,14 +19,12 @@ module allocate #(
 		input wire iEVENT_IRQ_BACK2FRONT,
 		input wire iEVENT_END,
 		//FI0R Set
-		input wire iEVENT_SETREG_FI0R_SET,
-		input wire iEVENT_SETREG_FI1R_SET,
 		input wire iEVENT_SETREG_PPCR_SET,
 		input wire iEVENT_SETREG_PCR_SET,
-		input wire [31:0] iEVENT_SETREG_FI0R,
-		input wire [31:0] iEVENT_SETREG_FI1R,
+		input wire iEVENT_SETREG_FI0R_SET,
 		input wire [31:0] iEVENT_SETREG_PPCR,
 		input wire [31:0] iEVENT_SETREG_PCR,
+		input wire [31:0] iEVENT_SETREG_FI0R,
 		//System Register Input
 		input wire [31:0] iSYSREG_FLAGR,
 		//System Register Output
@@ -125,6 +123,7 @@ module allocate #(
 	wire w_sysreg_idtr_register_valid;
 	wire [31:0] w_sysreg_idtr_register_data;
 	wire [31:0] w_sysreg_idtr_info_data;
+	wire [31:0] w_sysreg_fi0r_info_data;
 	wire w_sysreg_ppcr_register_valid;
 	wire [31:0] w_sysreg_ppcr_register_data;
 	wire [31:0] w_sysreg_ppcr_info_data;
@@ -240,7 +239,8 @@ module allocate #(
 		w_sysreg_ppsr_info_data,
 		w_sysreg_ppcr_info_data,
 		w_sysreg_frclr_info_data,
-		w_sysreg_frchr_info_data
+		w_sysreg_frchr_info_data,
+		w_sysreg_fi0r_info_data
 	);
 
 	assign {sysreg_source1_valid, sysreg_source1} = func_sysreg_set(
@@ -253,7 +253,8 @@ module allocate #(
 		w_sysreg_ppsr_info_data,
 		w_sysreg_ppcr_info_data,
 		w_sysreg_frclr_info_data,
-		w_sysreg_frchr_info_data
+		w_sysreg_frchr_info_data,
+		w_sysreg_fi0r_info_data
 	);
 
 	function [32:0] func_sysreg_set;
@@ -270,6 +271,7 @@ module allocate #(
 		input [31:0] func_ppcr;
 		input [31:0] func_frclr;
 		input [31:0] func_frchr;
+		input [31:0] func_fi0r;
 		begin
 			if(func_active)begin
 				case(func_sysreg)
@@ -281,6 +283,7 @@ module allocate #(
 					`SYSREG_PPCR : func_sysreg_set = {1'b1, func_ppcr};
 					`SYSREG_FRCLR : func_sysreg_set = {1'b1, func_frclr};
 					`SYSREG_FRCHR : func_sysreg_set = {1'b1, func_frchr};
+					`SYSREG_FI0R : func_sysreg_set = {1'b1, func_fi0r};
 					default	:
 						begin
 							func_sysreg_set = {1'b0, 32'h0};
@@ -370,6 +373,16 @@ module allocate #(
 	assign w_sysreg_idtr_register_valid = !iEVENT_HOLD && iWB_VALID && iWB_DESTINATION_SYSREG && iWB_WRITEBACK && iWB_DESTINATION == `SYSREG_IDTR;
 	assign w_sysreg_idtr_register_data = iWB_DATA;
 
+	//FI0R
+	allocate_system_register FI0R (
+		.iCLOCK(iCLOCK), 
+		.inRESET(inRESET), 
+		.iRESET_SYNC(iRESET_SYNC),
+		.iREGIST_DATA_VALID(iEVENT_SETREG_FI0R_SET), 
+		.iREGIST_DATA(iEVENT_SETREG_FI0R),
+		.oINFO_DATA(w_sysreg_fi0r_info_data)
+	);
+	
 	//PPSR : Previous Program Status Register
 	allocate_system_register PPSR (
 		.iCLOCK(iCLOCK), 

@@ -1,5 +1,6 @@
 `default_nettype none
 `include "processor.h"
+`include "core.h"
 
 module interrupt_control(
 		//System
@@ -23,6 +24,7 @@ module interrupt_control(
 		input wire iEXCEPTION_LOCK,
 		output wire oEXCEPTION_ACTIVE,
 		output wire [6:0] oEXCEPTION_IRQ_NUM,
+		output wire [31:0] oEXCEPTION_IRQ_FI0R,
 		input wire iEXCEPTION_IRQ_ACK
 	);
 	
@@ -45,6 +47,7 @@ module interrupt_control(
 	reg [6:0] b_irq_num;	
 	reg b_irq_type;
 	reg b_irq_ack;
+	reg [31:0] b_irq_fi0r;
 	//Generate
 	
 	integer i;
@@ -74,10 +77,10 @@ module interrupt_control(
 	
 	wire [5:0] external_num = iEXT_NUM + 6'h4;
 	
-	assign hardware_interrupt_valid = !iEXCEPTION_LOCK && iEXT_ACTIVE && (!ict_conf_valid[external_num] || (ict_conf_valid[external_num] && ict_conf_mask[external_num]));
+	assign hardware_interrupt_valid = !iEXCEPTION_LOCK && iEXT_ACTIVE && (/*!ict_conf_valid[external_num] || */(ict_conf_valid[external_num] && ict_conf_mask[external_num]));
 
 	
-	//Hardware Irq Latch
+	//Hardware IRQ
 	reg b_hw_irq_valid;
 	reg [6:0] b_hw_irq_num;
 	always@(posedge iCLOCK or negedge inRESET)begin
@@ -91,7 +94,7 @@ module interrupt_control(
 		end
 		else begin
 			if(!b_hw_irq_valid)begin
-				if(iEXT_ACTIVE && (!ict_conf_valid[external_num] || (ict_conf_valid[external_num] && ict_conf_mask[external_num])))begin
+				if(iEXT_ACTIVE && (/*!ict_conf_valid[external_num] || */(ict_conf_valid[external_num] && ict_conf_mask[external_num])))begin
 					b_hw_irq_valid <= 1'b1;
 					b_hw_irq_num <= {1'b0, external_num};
 				end
@@ -99,6 +102,29 @@ module interrupt_control(
 			else begin
 				if(b_state == STT_IDLE && !iEXCEPTION_LOCK)begin
 					b_hw_irq_valid <= 1'b0;
+				end
+			end
+		end
+	end
+	
+	//Invalid IRQ Vector
+	reg b_invalid_irq_valid;
+	always@(posedge iCLOCK or negedge inRESET)begin
+		if(!inRESET)begin
+			b_invalid_irq_valid <= 1'b0;
+		end
+		else if(iRESET_SYNC)begin
+			b_invalid_irq_valid <= 1'b0;
+		end
+		else begin
+			if(!b_invalid_irq_valid)begin
+				if(iEXT_ACTIVE && !ict_conf_valid[external_num])begin
+					b_invalid_irq_valid <= 1'b1;
+				end
+			end
+			else begin
+				if(b_state == STT_IDLE && !iEXCEPTION_LOCK)begin
+					b_invalid_irq_valid <= 1'b0;
 				end
 			end
 		end
@@ -118,7 +144,7 @@ module interrupt_control(
 			case(b_state)
 				STT_IDLE :
 					begin
-						if(b_hw_irq_valid && !iEXCEPTION_LOCK)begin
+						if((b_hw_irq_valid || b_invalid_irq_valid) && !iEXCEPTION_LOCK)begin
 							b_state <= STT_COMP_WAIT;
 							b_irq_ack <= 1'b1;
 						end
@@ -143,9 +169,11 @@ module interrupt_control(
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
 			b_irq_num <= {7{1'b0}};
+			b_irq_fi0r <= 32'h0;
 		end
 		else if(iRESET_SYNC)begin
 			b_irq_num <= {7{1'b0}};
+			b_irq_fi0r <= 32'h0;
 		end
 		else begin
 			case(b_state)
@@ -153,11 +181,17 @@ module interrupt_control(
 					begin
 						if(b_hw_irq_valid && !iEXCEPTION_LOCK)begin
 							b_irq_num <= b_hw_irq_num;
+							b_irq_fi0r <= 32'h0;
+						end
+						else if(b_invalid_irq_valid && !iEXCEPTION_LOCK)begin
+							b_irq_num <= `IRQ_NUM_INVALID_VECT;
+							b_irq_fi0r <= b_hw_irq_num;
 						end
 					end
 				default :
 					begin
 						b_irq_num <= b_irq_num;		
+						b_irq_fi0r <= b_irq_fi0r;
 					end
 			endcase	
 		end
@@ -166,7 +200,7 @@ module interrupt_control(
 	assign oEXT_ACK = b_irq_ack;
 	assign oEXCEPTION_ACTIVE = (b_state == STT_COMP_WAIT)? !iEXCEPTION_IRQ_ACK : software_interrupt_valid || hardware_interrupt_valid || b_hw_irq_valid;
 	assign oEXCEPTION_IRQ_NUM = (b_state == STT_COMP_WAIT)? b_irq_num : {1'b0, external_num};
-
+	assign oEXCEPTION_IRQ_FI0R = b_irq_fi0r;
 			
 endmodule
 

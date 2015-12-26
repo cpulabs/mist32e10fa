@@ -232,6 +232,7 @@ System Register Set
 `define		SYSREG_FRCHR		5'h0b
 `define		SYSREG_FRCR2FRCXR	5'h0c
 `define		SYSREG_PFLAGR		5'h0d
+`define		SYSREG_FI0R			5'h0e
 
 /******************************
 Execution Unit Select
@@ -273,6 +274,12 @@ CC
 `define		CC_SU		4'hD		//[signed <]((N = 1 and O = 0) or (N = 0 and O = 1))
 `define		CC_SO		4'hE		//[signed >](Z = 0 and S = V)
 `define		CC_SEU		4'hF		//[signed =<](Z = 1 or N! = V)
+
+
+/******************************
+IRQ
+******************************/
+`define		IRQ_NUM_INVALID_VECT	7'd43	//Invalid Interrupt Vector		
 
 
 
