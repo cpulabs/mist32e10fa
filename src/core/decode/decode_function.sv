@@ -1840,50 +1840,72 @@ module decode_function(
 					end
 				`OC_IB :
 					begin
-						if(!f_decode_inst[20])begin			//JO1
-							f_decode	=	{
-								/* Decode Error */						1'b0,
-								/* Condition Code & AFE */				f_decode_inst[19:16],
-								/* Source0 */							{5{1'b0}},								//none
-								/* Source1 */							{{27{1'b0}}, f_decode_inst[9:5]},		//Rd
-								/* Source0 is Flags*/					1'b0,
-								/* Source1 is Immediate */				1'b0,
-								/* Source0 Active */					1'b0,
-								/* Source1 Active */					1'b1,
-								/* Source0 is System Register */		1'b0,
-								/* Source1 is System Register */		1'b0,
-								/* Displacement Data -> ADV */			6'h0,
-								/* Displacement Data -> ADV Enable */	1'b0,
-								/* Destination */						`SYSREG_PCR,
-								/* Writeback Enable */					1'b0,
-								/* Writeback Flag Enable */				1'b0,
-								/* Destination is System Register */	1'b1,
-								/* Execute Module Command */			`EXE_BRANCH_INTB,
-								/* Execute Module */					`EXE_SELECT_BRANCH
-							};
-						end
-						else begin							//JI16
-							f_decode	=	{
-								/* Decode Error */						1'b0,
-								/* Condition Code & AFE */				f_decode_inst[19:16],
-								/* Source0 */							{5{1'b0}},								//none
-								/* Source1 */							{{14{1'b0}}, f_decode_inst[15:0], 2'h0},		//Rd
-								/* Source0 is Flags*/					1'b0,
-								/* Source1 is Immediate */				1'b1,
-								/* Source0 Active */					1'b0,
-								/* Source1 Active */					1'b1,
-								/* Source0 is System Register */		1'b0,
-								/* Source1 is System Register */		1'b0,
-								/* Displacement Data -> ADV */			6'h0,
-								/* Displacement Data -> ADV Enable */	1'b0,
-								/* Destination */						`SYSREG_PCR,
-								/* Writeback Enable */					1'b0,
-								/* Writeback Flag Enable */				1'b0,
-								/* Destination is System Register */	1'b1,
-								/* Execute Module Command */			`EXE_BRANCH_INTB,
-								/* Execute Module */					`EXE_SELECT_BRANCH
-							};
-						end
+					
+						f_decode	=	{
+							/* Decode Error */						1'b0,
+							/* Condition Code & AFE */				f_decode_inst[19:16],
+							/* Source0 */							5'h0,
+							/* Source1 */							{32{1'b0}},
+							/* Source0 is Flags*/					1'b0,
+							/* Source1 is Immediate */				1'b0,
+							/* Source0 Active */					1'b0,
+							/* Source1 Active */					1'b0,
+							/* Source0 is System Register */		1'b0,
+							/* Source1 is System Register */		1'b0,
+							/* Displacement Data -> ADV */			6'h0,
+							/* Displacement Data -> ADV Enable */	1'b0,
+							/* Destination */						`SYSREG_PCR,
+							/* Writeback Enable */					1'b0,
+							/* Writeback Flag Enable */				1'b0,
+							/* Destination is System Register */	1'b1,
+							/* Execute Module Command */			`EXE_BRANCH_INTB,
+							/* Execute Module */					`EXE_SELECT_BRANCH
+						};
+						
+//						if(!f_decode_inst[20])begin			//JO1
+//							f_decode	=	{
+//								/* Decode Error */						1'b0,
+//								/* Condition Code & AFE */				f_decode_inst[19:16],
+//								/* Source0 */							{5{1'b0}},								//none
+//								/* Source1 */							{{27{1'b0}}, f_decode_inst[9:5]},		//Rd
+//								/* Source0 is Flags*/					1'b0,
+//								/* Source1 is Immediate */				1'b0,
+//								/* Source0 Active */					1'b0,
+//								/* Source1 Active */					1'b1,
+//								/* Source0 is System Register */		1'b0,
+//								/* Source1 is System Register */		1'b0,
+//								/* Displacement Data -> ADV */			6'h0,
+//								/* Displacement Data -> ADV Enable */	1'b0,
+//								/* Destination */						`SYSREG_PCR,
+//								/* Writeback Enable */					1'b0,
+//								/* Writeback Flag Enable */				1'b0,
+//								/* Destination is System Register */	1'b1,
+//								/* Execute Module Command */			`EXE_BRANCH_INTB,
+//								/* Execute Module */					`EXE_SELECT_BRANCH
+//							};
+//						end
+//						else begin							//JI16
+//							f_decode	=	{
+//								/* Decode Error */						1'b0,
+//								/* Condition Code & AFE */				f_decode_inst[19:16],
+//								/* Source0 */							{5{1'b0}},								//none
+//								/* Source1 */							{{14{1'b0}}, f_decode_inst[15:0], 2'h0},		//Rd
+//								/* Source0 is Flags*/					1'b0,
+//								/* Source1 is Immediate */				1'b1,
+//								/* Source0 Active */					1'b0,
+//								/* Source1 Active */					1'b1,
+//								/* Source0 is System Register */		1'b0,
+//								/* Source1 is System Register */		1'b0,
+//								/* Displacement Data -> ADV */			6'h0,
+//								/* Displacement Data -> ADV Enable */	1'b0,
+//								/* Destination */						`SYSREG_PCR,
+//								/* Writeback Enable */					1'b0,
+//								/* Writeback Flag Enable */				1'b0,
+//								/* Destination is System Register */	1'b1,
+//								/* Execute Module Command */			`EXE_BRANCH_INTB,
+//								/* Execute Module */					`EXE_SELECT_BRANCH
+//							};
+//						end
 					end
 				/*******************
 				System Read
