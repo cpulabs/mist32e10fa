@@ -11,3 +11,4 @@ transcript*
 *.pyc
 
 /sim/inst_level/work
+/sim/inst_level_rand/work

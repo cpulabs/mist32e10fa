@@ -564,55 +564,6 @@ module decode_function(
 							};
 						end
 					end
-				`OC_URAND :
-					begin
-						if(!f_decode_inst[20])begin			//O2
-							f_decode	=	{
-								/* Decode Error */						1'b0,
-								/* Condition Code & AFE */				f_decode_inst[19:16],
-								/* Source0 */							f_decode_inst[9:5],
-								/* Source1 */							{{27{1'b0}}, f_decode_inst[4:0]},
-								/* Source0 is Flags*/					1'b0,
-								/* Source1 is Immediate */				1'b0,
-								/* Source0 Active */					1'b1,
-								/* Source1 Active */					1'b1,
-								/* Source0 is System Register */		1'b0,
-								/* Source1 is System Register */		1'b0,
-								/* Displacement Data -> ADV */			6'h0,
-								/* Displacement Data -> ADV Enable */	1'b0,
-								/* Destination */						f_decode_inst[9:5],
-								/* Writeback Enable */					1'b1,
-								/* Writeback Flag Enable */				1'b1,
-								/* Destination is System Register */	1'b0,
-								/* Execute Module Command */			`EXE_MUL_RAND,
-								/* Execute Module */					`EXE_SELECT_MUL
-							};
-						end
-						else begin							//I11
-							f_decode	=	{
-								/* Decode Error */						1'b0,
-								/* Condition Code & AFE */				f_decode_inst[19:16],
-								/* Source0 */							f_decode_inst[9:5],
-								/* Source1 */							{{21{1'b0}}, f_decode_inst[15:10], f_decode_inst[4:0]},
-								/* Source0 is Flags*/					1'b0,
-								/* Source1 is Immediate */				1'b1,
-								/* Source0 Active */					1'b1,
-								/* Source1 Active */					1'b1,
-								/* Source0 is System Register */		1'b0,
-								/* Source1 is System Register */		1'b0,
-								/* Displacement Data -> ADV */			6'h0,
-								/* Displacement Data -> ADV Enable */	1'b0,
-								/* Destination */						f_decode_inst[9:5],
-								/* Writeback Enable */					1'b1,
-								/* Writeback Flag Enable */				1'b1,
-								/* Destination is System Register */	1'b0,
-								/* Execute Module Command */			`EXE_MUL_RAND,
-								/* Execute Module */					`EXE_SELECT_MUL
-							};
-						end
-					end
-
-
 
 				/*******************
 				Shift

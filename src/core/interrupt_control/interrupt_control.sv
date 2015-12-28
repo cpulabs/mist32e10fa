@@ -42,7 +42,7 @@ module interrupt_control(
 	reg ict_conf_mask[0:63];
 	reg ict_conf_valid[0:63];
 	reg	[1:0] ict_conf_level[0:63];
-	//Instruction State
+	//Interrupt State
 	reg [1:0] b_state;
 	reg [6:0] b_irq_num;	
 	reg b_irq_type;
@@ -53,7 +53,7 @@ module interrupt_control(
 	integer i;
 	
 	/****************************************************
-	Instruction Config Table
+	Interrupt Config Table
 	***************************************************/
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
@@ -70,7 +70,7 @@ module interrupt_control(
 			if(iICT_VALID)begin	
 				ict_conf_mask [iICT_ENTRY] <= iICT_CONF_MASK;
 				ict_conf_valid [iICT_ENTRY] <= iICT_CONF_VALID;
-				ict_conf_level [iICT_ENTRY] <= iICT_CONF_LEVEL;
+				//ict_conf_level [iICT_ENTRY] <= iICT_CONF_LEVEL;
 			end
 		end
 	end
