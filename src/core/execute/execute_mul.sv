@@ -39,10 +39,15 @@ module execute_mul(
 	assign mul_zf_h = (mul_tmp == {64{1'b0}})? 1'b1 : 1'b0;
 
 
-
+	assign oFLAGS = (iCMD == `EXE_MUL_MULH || iCMD == `EXE_MUL_UMULH)? {mul_sf_h, mul_of_h, mul_cf_h, mul_pf_h, mul_zf_h} : {mul_sf_l, mul_of_l, mul_cf_l, mul_pf_l, mul_zf_l};
+	assign oDATA = (iCMD == `EXE_MUL_MULH || iCMD == `EXE_MUL_UMULH)? mul_tmp[63:32] : mul_tmp[31:0];
+	
+	
 	/******************************************
 	Rand
 	******************************************/
+	//for RAND instruction
+	/*
 	//function 
 	wire [31:0] xor_shift = func_xorshift32(iDATA_1);//{iDATA_1[30:0], (iDATA_1[31]^iDATA_1[21]^iDATA_1[1]^iDATA_1[0])};
 
@@ -56,13 +61,6 @@ module execute_mul(
 			func_xorshift32 = func_tmp1 ^ (func_tmp1 << 5);
 		end
 	endfunction
-
-
-
-	/*
-	assign oFLAGS = (iCMD == `EXE_MUL_MULH || iCMD == `EXE_MUL_UMULH)? {mul_sf_h, mul_of_h, mul_cf_h, mul_pf_h, mul_zf_h} : {mul_sf_l, mul_of_l, mul_cf_l, mul_pf_l, mul_zf_l};
-	assign oDATA = (iCMD == `EXE_MUL_MULH || iCMD == `EXE_MUL_UMULH)? mul_tmp[63:32] : mul_tmp[31:0];
-	*/
 
 	logic [4:0] flags_wire;
 	logic [31:0] data_wire;
@@ -84,6 +82,7 @@ module execute_mul(
 
 	assign oFLAGS = flags_wire;
 	assign oDATA = data_wire;
+	*/
 
 endmodule
 

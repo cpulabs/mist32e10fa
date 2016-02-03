@@ -15,7 +15,7 @@ Opcode
 `define		OC_SEXT8	10'h01C
 `define		OC_SEXT16	10'h01D
 
-`define		OC_RAND		10'h020		//Original
+//`define		OC_RAND		10'h020		//for RAND instruction
 
 //Shift
 `define		OC_SHL		10'h040
@@ -143,7 +143,9 @@ Execute CMD Set
 `define		EXE_MUL_MULH			5'h02
 `define		EXE_MUL_UMULL			5'h03
 `define		EXE_MUL_UMULH			5'h04
-`define		EXE_MUL_RAND			5'h10		//Original
+
+//`define		EXE_MUL_RAND			5'h10		//for RAND instruction
+
 //Load/Store Unit
 `define		EXE_LDSW_PUSH			5'h00
 `define		EXE_LDSW_POP			5'h01
