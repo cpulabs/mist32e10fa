@@ -15,11 +15,9 @@ module pipeline_control(
 		//Core Internal Event - Set System Register
 		output wire oEVENT_SETREG_PCR_SET,
 		output wire oEVENT_SETREG_PPCR_SET,
-		output wire oEVENT_SETREG_SPR_SET,
 		output wire oEVENT_SETREG_FI0R_SET,
 		output wire [31:0] oEVENT_SETREG_PCR,
 		output wire [31:0] oEVENT_SETREG_PPCR,
-		output wire [31:0] oEVENT_SETREG_SPR,
 		output wire [31:0] oEVENT_SETREG_FI0R,
 		//System Register - Input
 		input wire [31:0] iSYSREG_SPR,

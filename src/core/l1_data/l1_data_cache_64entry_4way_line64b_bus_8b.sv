@@ -613,7 +613,7 @@ module l1_data_cache_64entry_4way_line64b_bus_8b(
 	/*****************************************************
 	Output Assign
 	*****************************************************/
-	assign oRD_BUSY = iRD_BUSY || (iRD_REQ && iWR_REQ && iRD_ADDR == iWR_ADDR);	
+	assign oRD_BUSY = iRD_BUSY;// || (iRD_REQ && iWR_REQ && iRD_ADDR == iWR_ADDR);	
 	assign oRD_VALID = b_load_req_valid && !this_read_lock;
 	assign oRD_HIT = b_load_req_valid && !this_read_lock && b_rd_hit;
 	assign oRD_DATA = (b_load_req_valid && !this_read_lock && b_rd_hit)? (
@@ -622,7 +622,7 @@ module l1_data_cache_64entry_4way_line64b_bus_8b(
 													(b_rd_way == 2'h2)? func_data_selector(b_rd_addr[5:2], memory_way2_out_data) : func_data_selector(b_rd_addr[5:2], memory_way3_out_data)
 												)
 											)
-										) : 64'h0;	
+										) : 32'h0;	
 	
 	
 	assign oWR_BUSY = this_write_lock;

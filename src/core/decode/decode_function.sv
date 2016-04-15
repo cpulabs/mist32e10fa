@@ -2259,7 +2259,7 @@ module decode_function(
 							/* Execute Module */					`EXE_SELECT_SYS_REG
 						};
 					end
-				`OC_SRFRCLR:
+				`OC_SRFRCLW:
 					begin									//O1
 						f_decode	=	{
 							/* Decode Error */						1'b0,
@@ -2282,7 +2282,7 @@ module decode_function(
 							/* Execute Module */					`EXE_SELECT_SYS_REG
 						};
 					end
-				`OC_SRFRCHR:
+				`OC_SRFRCHW:
 					begin									//O1
 						f_decode	=	{
 							/* Decode Error */						1'b0,
@@ -2454,7 +2454,7 @@ module decode_function(
 				//Error
 				default :
 					begin
-						f_decode				=		{1'b1, {77{1'b0}}};
+						f_decode				=		{1'b1, {75{1'b0}}};
 						/*
 						$display("Instruction Error : Decoder > Not Match Instruction(TIME:%t, Line0 Valid0:%d, Line1 Valid:%d)", $stime, iPREVIOUS_0_INST_VALID, iPREVIOUS_1_INST_VALID);
 						*/

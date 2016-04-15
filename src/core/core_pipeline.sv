@@ -81,10 +81,8 @@ module core_pipeline(
 	//Event-Sysreg
 	wire core_event_sysreg_set_pcr_set;
 	wire core_event_sysreg_set_ppcr_set;
-	wire core_event_sysreg_set_spr_set;
 	wire core_event_sysreg_set_fi0r_set;
 	wire [31:0] core_event_sysreg_set_ppcr;
-	wire [31:0] core_event_sysreg_set_spr;
 	wire [31:0] core_event_sysreg_set_fi0r;
 	wire [31:0] core_event_sysreg_set_pcr;
 	//Fetch
@@ -293,11 +291,9 @@ module core_pipeline(
 		//System Register
 		.oEVENT_SETREG_PCR_SET(core_event_sysreg_set_pcr_set),
 		.oEVENT_SETREG_PPCR_SET(core_event_sysreg_set_ppcr_set),
-		.oEVENT_SETREG_SPR_SET(core_event_sysreg_set_spr_set),
 		.oEVENT_SETREG_FI0R_SET(core_event_sysreg_set_fi0r_set),
 		.oEVENT_SETREG_PCR(core_event_sysreg_set_pcr),
 		.oEVENT_SETREG_PPCR(core_event_sysreg_set_ppcr),
-		.oEVENT_SETREG_SPR(core_event_sysreg_set_spr),
 		.oEVENT_SETREG_FI0R(core_event_sysreg_set_fi0r),
 		/************************************
 		System Register - Input

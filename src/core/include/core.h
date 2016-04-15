@@ -81,8 +81,8 @@ Opcode
 `define		OC_SRIDTW		10'h0F2
 `define		OC_SRPSW		10'h0F3
 `define		OC_SRFRCW		10'h0F4
-`define		OC_SRFCLW		10'h0F5
-`define		OC_SRFCHW		10'h0F6
+`define		OC_SRFRCLW		10'h0F5
+`define		OC_SRFRCHW		10'h0F6
 `define		OC_SRSPADD		10'h0ff
 //Other
 `define		OC_NOP			10'h100
@@ -105,7 +105,7 @@ Execute CMD Set
 `define		EXE_LOGIC_NAND			5'h06
 `define		EXE_LOGIC_NOR			5'h07
 `define		EXE_LOGIC_XNOR			5'h08
-`define		EXE_LOGIC_TEST			5'h08
+`define		EXE_LOGIC_TEST			5'h09
 `define		EXE_LOGIC_WBL			5'h0A
 `define		EXE_LOGIC_WBH			5'h0B
 `define		EXE_LOGIC_CLB			5'h0C

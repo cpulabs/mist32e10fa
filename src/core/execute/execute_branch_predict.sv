@@ -30,7 +30,7 @@ module execute_branch_predict(
 				//Jump True
 				if(iPREV_BRANCH_VALID)begin
 					//Branch Predict Hardware Enable / Disable
-					`ifdef MIST1032ISA_BRANCH_PREDICT
+					`ifdef MIST32E10FA_BRANCH_PREDICT_ENA
 						//Hit Branch Predict
 						if(iPREV_BRANCH_PREDICT_ENA && iPREV_BRANCH_PREDICT_ADDR == iPREV_JUMP_ADDR)begin
 							predict_hit = 1'b1;
@@ -50,13 +50,16 @@ module execute_branch_predict(
 				//Non Branch(Compiler predict instruction)
 				else begin
 					//Branch Predict Enable
-					`ifdef MIST1032ISA_BRANCH_PREDICT
+					`ifdef MIST32E10FA_BRANCH_PREDICT_ENA
 						predict_hit = 1'b0;
 					`else
 					//Predict Disable
 						predict_hit = 1'b0;
 					`endif
 				end
+			end
+			else begin
+				predict_hit = 1'b0;
 			end
 		end
 		else begin

@@ -36,7 +36,6 @@ module interrupt_control(
 	Register and Wire
 	***************************************************/
 	//Interrupt Valid
-	wire software_interrupt_valid;
 	wire hardware_interrupt_valid;
 	//Interrupt Config Table
 	reg ict_conf_mask[0:63];
@@ -198,7 +197,7 @@ module interrupt_control(
 	end
 	
 	assign oEXT_ACK = b_irq_ack;
-	assign oEXCEPTION_ACTIVE = (b_state == STT_COMP_WAIT)? !iEXCEPTION_IRQ_ACK : software_interrupt_valid || hardware_interrupt_valid || b_hw_irq_valid;
+	assign oEXCEPTION_ACTIVE = (b_state == STT_COMP_WAIT)? !iEXCEPTION_IRQ_ACK : hardware_interrupt_valid || b_hw_irq_valid;
 	assign oEXCEPTION_IRQ_NUM = (b_state == STT_COMP_WAIT)? b_irq_num : {1'b0, external_num};
 	assign oEXCEPTION_IRQ_FI0R = b_irq_fi0r;
 			

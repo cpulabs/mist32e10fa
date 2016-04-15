@@ -137,6 +137,7 @@ module pipeline_control_irq_call(
 		.iLDST_DATA(iLDST_DATA)
 	);
 
+	/*
 	reg [31:0] b_hundler;
 	always@(posedge iCLOCK or negedge inRESET)begin
 		if(!inRESET)begin
@@ -151,7 +152,7 @@ module pipeline_control_irq_call(
 			end
 		end
 	end
-
+	*/
 
 	/*****************************************************
 	Load Store Pipe
