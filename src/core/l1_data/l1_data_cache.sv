@@ -390,8 +390,6 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		end
 	end
 
-	assign cache_result_hit = 1'h0;		//cache invalid now
-
 
 	l1_data_cache_64entry_4way_line64b_bus_8b CACHE_MODULE(
 		/********************************
@@ -411,7 +409,7 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		.iRD_ADDR({iLDST_ADDR[31:2], 2'h0}),		//Tag:22bit | Index:4bit(4Way*16Entry) | LineSize:6bit(64B)
 		//Search Output Result
 		.oRD_VALID(cache_result_valid),
-		.oRD_HIT(),//cache_result_hit),
+		.oRD_HIT(cache_result_hit),
 		.iRD_BUSY(b_req_main_state != L_PARAM_IDLE),
 		.oRD_DATA(cache_result_data),
 		/********************************
@@ -420,9 +418,9 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		.iUP_REQ((b_req_main_state == L_PARAM_WR_MEMREQ) && !data_request_lock),
 		.oUP_BUSY(),
 		.iUP_ORDER(b_req_order),
-		.iUP_MASK(b_req_mask),
+		.iUP_MASK({b_req_mask[0], b_req_mask[1], b_req_mask[2], b_req_mask[3]}),
 		.iUP_ADDR(b_req_addr),
-		.iUP_DATA(b_req_data),
+		.iUP_DATA(func_data({b_req_mask[0], b_req_mask[1], b_req_mask[2], b_req_mask[3]}, b_req_data)),
 		/********************************
 		Write Request
 		********************************/
@@ -432,6 +430,33 @@ always@(posedge iCLOCK or negedge inRESET)begin
 		.iWR_DATA(b_cache_result_data)
 	);
 
+	function [31:0] func_data;
+		input [3:0] func_little_bytemask;
+		input [31:0] func_src_data; 
+		begin
+			if(func_little_bytemask == 4'hf)begin
+				func_data = func_src_data;
+			end
+			else if(func_little_bytemask == 4'b1100)begin
+				func_data = {func_src_data[15:0], 16'h0};
+			end
+			else if(func_little_bytemask == 4'b0011)begin
+				func_data = {16'h0, func_src_data[31:16]};
+			end
+			else if(func_little_bytemask == 4'b1000)begin
+				func_data = {func_src_data[7:0], 24'h0};
+			end
+			else if(func_little_bytemask == 4'b0100)begin
+				func_data = {8'h0, func_src_data[15:8], 16'h0};
+			end
+			else if(func_little_bytemask == 4'b0010)begin
+				func_data = {16'h0, func_src_data[23:16], 8'h0};
+			end
+			else begin
+				func_data = {24'h0, func_src_data[31:24]};
+			end
+		end
+	endfunction
 
 
 	reg next_data_valid;
